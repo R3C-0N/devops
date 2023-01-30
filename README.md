@@ -216,6 +216,6 @@ docker push matmed/tp01-httpd:1.0
 ```
 
 **links**
-(httpd)[https://hub.docker.com/repository/docker/matmed/tp01-httpd/general]
-(backend)[https://hub.docker.com/repository/docker/matmed/tp01-backend/general]
-(database)[https://hub.docker.com/repository/docker/matmed/tp01-database/general]
+[httpd](https://hub.docker.com/repository/docker/matmed/tp01-httpd/general)
+[backend](https://hub.docker.com/repository/docker/matmed/tp01-backend/general)
+[database](https://hub.docker.com/repository/docker/matmed/tp01-database/general)
