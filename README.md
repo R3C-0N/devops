@@ -193,3 +193,29 @@ networks:
             config:
                 - subnet: 172.19.0.0/16
 ```
+
+### 1-5 Document your publication commands and published images in dockerhub.
+
+**To login**
+```bash
+docker login -u matmed -p xxxxxxxxxxxxxx
+```
+
+**Tag**
+```bash
+docker tag devops-backend:latest matmed/tp01-backend:1.0
+docker tag devops-database:latest matmed/tp01-database:1.0
+docker tag devops-httpd:latest matmed/tp01-httpd:1.0
+```
+
+**Push to docker hub**
+```bash
+docker push matmed/tp01-backend:1.0
+docker push matmed/tp01-database:1.0
+docker push matmed/tp01-httpd:1.0
+```
+
+**links**
+(httpd)[https://hub.docker.com/repository/docker/matmed/tp01-httpd/general]
+(backend)[https://hub.docker.com/repository/docker/matmed/tp01-backend/general]
+(database)[https://hub.docker.com/repository/docker/matmed/tp01-database/general]
