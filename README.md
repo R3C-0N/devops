@@ -75,14 +75,8 @@ docker build -t mathis/tp01/backend-api .
 docker run --network app-network --name backend-api -d mathis/tp01/backend-api
 ```
 
-**start adminer**
-```
-docker run -p "8090:8080" --network app-network --name adminer -d adminer
-```
-
 **destruct containers**
 ```
-docker rm -f adminer
 docker rm -f app-database
 ```
 
