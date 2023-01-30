@@ -18,10 +18,14 @@ COPY ./scripts/InsertData.sql /docker-entrypoint-initdb.d
 ```
 
 **build**
-``docker build -t mathis/tp01/database .``
+```
+docker build -t mathis/tp01/database .
+```
 
 **create network**
-``docker network create app-network``
+```
+docker network create app-network
+```
 
 **start database**
 ```
