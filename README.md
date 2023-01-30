@@ -86,7 +86,7 @@ docker rm -f adminer
 docker rm -f app-database
 ```
 
-1-2 Why do we need a multistage build? And explain each step of this dockerfile.
+### 1-2 Why do we need a multistage build? And explain each step of this dockerfile.
 
 The multistage building is used to separate tasks. First we need to compile the project and then we execute it.
 
