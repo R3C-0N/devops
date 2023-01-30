@@ -42,3 +42,11 @@ docker run -p "8090:8080" --network app-network --name adminer -d adminer
 docker rm -f adminer
 docker rm -f app-database
 ```
+
+**Result**
+```bash
+docker ps
+CONTAINER ID   IMAGE                  COMMAND                  CREATED          STATUS          PORTS                    NAMES
+0201e27823d0   mathis/tp01/database   "docker-entrypoint.s…"   4 minutes ago    Up 4 minutes    3306/tcp, 5432/tcp       app-database
+e30d9652ac37   adminer                "entrypoint.sh php -…"   36 minutes ago   Up 36 minutes   0.0.0.0:8090->8080/tcp   adminer
+```
