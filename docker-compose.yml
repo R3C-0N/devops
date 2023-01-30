@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+    backend:
+        build: ./backend-api
+        networks:
+            my-network:
+                ipv4_address: 172.19.0.4
+        depends_on:
+            - database
+
+    database:
+        build: ./database
+        volumes:
+            - /tmp/pgsql:/var/lib/postgresql/data
+        networks:
+            - my-network
+
+    httpd:
+        build: ./http-server
+        ports:
+            - 80:80
+        networks:
+            - my-network
+        depends_on:
+            - backend
+
+networks:
+    my-network:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 172.19.0.0/16
+
+
