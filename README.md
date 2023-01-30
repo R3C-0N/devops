@@ -140,3 +140,56 @@ LoadModule proxy_module modules/mod_proxy.so
 LoadModule proxy_http_module modules/mod_proxy_http.so
 ```
 
+### 1-3 Document docker-compose most important commands. 1-4 Document your docker-compose file.
+
+**Docker compose file**
+```docker-compose
+version: '3.7'
+
+services:
+    # we start backend project
+    backend:
+        # Use dockerfile
+        build: ./backend-api
+        # Use my-network network with fixed ip
+        networks:
+            my-network:
+                ipv4_address: 172.19.0.4
+        # Backend depend on database project
+        depends_on:
+            - database
+
+    # we start database project
+    database:
+        # Use dockerfile
+        build: ./database
+        # We copy volumes to keep datas between executions
+        volumes:
+            - /tmp/pgsql:/var/lib/postgresql/data
+        # Use my-network network with fixed ip
+        networks:
+            - my-network
+
+    # we start reverse proxy project
+    httpd:
+        # Use dockerfile
+        build: ./http-server
+        # Open port 80 for host machine
+        ports:
+            - 80:80
+        # Use my-network network with fixed ip
+        networks:
+            - my-network
+            # httpd depend on backend project
+        depends_on:
+            - backend
+
+# we create network project with a bridge connection
+networks:
+    my-network:
+        driver: bridge
+        # we specify a specific subnet to use for httpd
+        ipam:
+            config:
+                - subnet: 172.19.0.0/16
+```
