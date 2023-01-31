@@ -222,5 +222,5 @@ docker push matmed/tp01-httpd:1.0
 
 ```mermaid
 flowchart LR
-    a(http proxy) --> b(backend API) --> c(Database)
+a(HTTPDi proxy) --> b(backend API) --> c(Database)
 ```
