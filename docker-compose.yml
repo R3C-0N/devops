@@ -1,33 +1,43 @@
 version: '3.7'
 
 services:
+    # we start backend project
     backend:
+        # Use dockerfile
         build: ./backend-api
+        # Use my-network network
         networks:
-            my-network:
-                ipv4_address: 172.19.0.4
+            - my-network
+        # Backend depend on database project
         depends_on:
             - database
 
+    # we start database project
     database:
+        # Use dockerfile
         build: ./database
+        # We copy volumes to keep datas between executions
         volumes:
             - /tmp/pgsql:/var/lib/postgresql/data
+        # Use my-network network with fixed ip
         networks:
             - my-network
 
+    # we start reverse proxy project
     httpd:
+        # Use dockerfile
         build: ./http-server
+        # Open port 80 for host machine
         ports:
             - 80:80
+        # Use my-network network with fixed ip
         networks:
             - my-network
+            # httpd depend on backend project
         depends_on:
             - backend
 
+            # we create network project with a bridge connection
 networks:
     my-network:
         driver: bridge
-        ipam:
-            config:
-                - subnet: 172.19.0.0/16

@@ -143,7 +143,7 @@ LoadModule proxy_http_module modules/mod_proxy_http.so
 ### 1-3 Document docker-compose most important commands. 1-4 Document your docker-compose file.
 
 **Docker compose file**
-```docker-compose
+```yaml
 version: '3.7'
 
 services:
