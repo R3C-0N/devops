@@ -222,9 +222,12 @@ docker push matmed/tp01-httpd:1.0
 
 ```mermaid
 flowchart LR
-a(HTTPD proxy:80)
 
-subgraph one
+subgraph host:80
+a(HTTPD proxy)
+end
+
+subgraph unreachable
 b(backend API) --> c(Database)
 end
 
