@@ -29,6 +29,13 @@ jobs:
 
         # steps to perform in job
     steps:
+       - name: Docker Login
+         uses: docker/login-action@v2.1.0
+         with:
+            username: ${{secrets.DOCKER_USER}}
+            password: ${{secrets.DOCKER_PWD}}
+
+    
        - name: Checkout code
          uses: actions/checkout@v2.5.0
 
