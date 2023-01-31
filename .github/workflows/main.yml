@@ -38,11 +38,6 @@ jobs:
             username: ${{secrets.DOCKER_USER}}
             password: ${{secrets.DOCKER_PWD}}
             
-       - name: Show outputs
-         run: |
-            echo "DOCKER_USER: ${{ secrets.DOCKER_USER }}"
-            echo "DOCKER_PWD: ${{ secrets.DOCKER_PWD }}"
-    
        - name: Build image and push backend
          uses: docker/build-push-action@v3
          with:
@@ -50,6 +45,7 @@ jobs:
              context: ./backend-api
              # Note: tags has to be all lower-case
              tags:  ${{secrets.DOCKER_USER}}/tp01-backend
+             push: ${{ github.ref == 'refs/heads/main' }}
 
        - name: Build image and push database
          uses: docker/build-push-action@v3
@@ -58,6 +54,7 @@ jobs:
              context: ./database
              # Note: tags has to be all lower-case
              tags:  ${{secrets.DOCKER_USER}}/tp01-database
+             push: ${{ github.ref == 'refs/heads/main' }}
 
        - name: Build image and push httpd
          uses: docker/build-push-action@v3
@@ -66,3 +63,4 @@ jobs:
              context: ./http-server
              # Note: tags has to be all lower-case
              tags:  ${{secrets.DOCKER_USER}}/tp01-httpd
+             push: ${{ github.ref == 'refs/heads/main' }}
