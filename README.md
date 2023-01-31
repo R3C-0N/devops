@@ -36,3 +36,51 @@ jobs:
 ```
 **Execution**
 ![github action](./img/github-action.png)
+
+**docker build and push**
+```yaml
+# define job to build and publish docker image
+build-and-push-docker-image:
+    # run only when code is compiling and tests are passing
+    needs: test-backend
+    environment: devops-tp02
+    runs-on: ubuntu-22.04
+
+    # steps to perform in job
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v2.5.0
+
+        # Login with docker login action
+        - name: Docker Login
+          uses: docker/login-action@v2.1.0
+          with:
+              username: ${{secrets.DOCKER_USER}}
+              password: ${{secrets.DOCKER_PWD}}
+
+       # Then we will build every images with the same method/action
+        - name: Build image and push backend
+          uses: docker/build-push-action@v3
+          with:
+          # relative path to the place where source code with Dockerfile is located
+            context: ./backend-api
+            # Note: tags where the image is pushed
+            tags:  ${{secrets.DOCKER_USER}}/tp01-backend
+            # Push if github.ref (the branch updated) is equal to 'refs/heads/TP02'
+            push: ${{ github.ref == 'refs/heads/TP02' }}
+
+        - name: Build image and push database
+          uses: docker/build-push-action@v3
+          with:
+            context: ./database
+            tags:  ${{secrets.DOCKER_USER}}/tp01-database
+            push: ${{ github.ref == 'refs/heads/TP02' }}
+
+        - name: Build image and push httpd
+          uses: docker/build-push-action@v3
+          with:
+              context: ./http-server
+              tags:  ${{secrets.DOCKER_USER}}/tp01-httpd
+              push: ${{ github.ref == 'refs/heads/TP02' }}
+```
+
