@@ -194,6 +194,11 @@ networks:
                 - subnet: 172.19.0.0/16
 ```
 
+**Run docker**
+```bash
+docker-compose -f ./docker-compose.yml up -d
+```
+
 ### 1-5 Document your publication commands and published images in dockerhub.
 
 **To login**
