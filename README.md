@@ -119,7 +119,7 @@ $ /usr/local/apache2/conf/httpd.conf
 ```
 
 **We need to add:**
-```bash
+```conf
 <VirtualHost *:80>
     ProxyPreserveHost On
     ProxyPass / http://<container_ip>:<container_port>/
@@ -151,10 +151,9 @@ services:
     backend:
         # Use dockerfile
         build: ./backend-api
-        # Use my-network network with fixed ip
+        # Use my-network network
         networks:
-            my-network:
-                ipv4_address: 172.19.0.4
+            - my-network
         # Backend depend on database project
         depends_on:
             - database
@@ -188,10 +187,6 @@ services:
 networks:
     my-network:
         driver: bridge
-        # we specify a specific subnet to use for httpd
-        ipam:
-            config:
-                - subnet: 172.19.0.0/16
 ```
 
 **Run docker**
