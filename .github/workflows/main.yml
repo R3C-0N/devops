@@ -18,3 +18,39 @@ jobs:
           
       - name: Build and test with Maven
         run: mvn clean verify --file ./backend-api/app/pom.xml
+
+
+# define job to build and publish docker image
+  build-and-push-docker-image:
+  # run only when code is compiling and tests are passing
+    needs: test-backend
+    runs-on: ubuntu-22.04
+
+        # steps to perform in job
+    steps:
+       - name: Checkout code
+         uses: actions/checkout@v2.5.0
+
+       - name: Build image and push backend
+         uses: docker/build-push-action@v3
+         with:
+             # relative path to the place where source code with Dockerfile is located
+             context: ./backend-api
+             # Note: tags has to be all lower-case
+             tags:  ${{secrets.DOCKER_USER}}/tp01-backend
+
+       - name: Build image and push database
+         uses: docker/build-push-action@v3
+         with:
+             # relative path to the place where source code with Dockerfile is located
+             context: ./database
+             # Note: tags has to be all lower-case
+             tags:  ${{secrets.DOCKER_USER}}/tp01-database
+
+       - name: Build image and push httpd
+         uses: docker/build-push-action@v3
+         with:
+             # relative path to the place where source code with Dockerfile is located
+             context: ./http-server
+             # Note: tags has to be all lower-case
+             tags:  ${{secrets.DOCKER_USER}}/tp01-httpd
