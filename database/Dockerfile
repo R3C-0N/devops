@@ -8,3 +8,5 @@ ENV POSTGRES_DB=db \
 # install schemes
 COPY ./scripts/CreateScheme.sql /docker-entrypoint-initdb.d
 COPY ./scripts/InsertData.sql /docker-entrypoint-initdb.d
+
+EXPOSE 5432
