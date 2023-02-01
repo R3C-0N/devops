@@ -107,3 +107,20 @@ XXXXXXXXXXXXXXXXXXXXXXX
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 </properties>
 ```
+
+
+## Bonus: split pipelines
+
+To split Pipelines we have to use "on.workflow_run" and separate each jobs in different Workflow
+
+**build-and-push**
+```yaml
+workflow_run:
+    branches:
+        - develop # branch must be default branch
+    # Workflow Run Event. Only trigger the workflow if the previous run was successful.
+    types: [completed]
+    # Only trigger the workflow for workflow run of `CI devops 2023`
+    workflows: [CI devops 2023]
+```
+
