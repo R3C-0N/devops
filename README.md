@@ -84,3 +84,26 @@ build-and-push-docker-image:
               push: ${{ github.ref == 'refs/heads/TP02' }}
 ```
 
+### Document your quality gate configuration.
+
+**New secret on Github**
+```
+SONAR_TOKEN
+XXXXXXXXXXXXXXXXXXXXXXX
+```
+
+**Workflow**
+```yaml
+[...]
+    - name: Sonar Cloud
+      run: mvn -B -e verify sonar:sonar -Dsonar.projectKey=R3C-0N_devops -Dsonar.organization=r3c-0n -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}  --file ./backend-api/app/pom.xml
+[...]
+```
+
+**backend/app/pom.xml**
+```xml
+<properties>
+    <sonar.organization>r3c-0n</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+</properties>
+```
