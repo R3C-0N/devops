@@ -1,13 +1,19 @@
-name: CI devops 2023
+name: Build and Push images
 'on':
   push:
       branches:
           - develop
+  workflow_run:
+      types: [completed]
+      # Workflow Run Event. Only trigger the workflow if the previous run was successful.
+      status: success
+      # Only trigger the workflow for workflow run of `CI devops 2023`
+      workflow: CI devops 2023
+
 jobs:
 # define job to build and publish docker image
   build-and-push-docker-image:
   # run only when code is compiling and tests are passing
-    needs: test-backend
     environment: devops-tp02
     runs-on: ubuntu-22.04
 
