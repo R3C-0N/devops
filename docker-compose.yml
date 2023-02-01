@@ -59,7 +59,24 @@ services:
         build: ./http-server
         # Open port 80 for host machine
         ports:
-            - 80:80
+            - "8080:8080"
+        # Use my-network network with fixed ip
+        networks:
+            - my-network
+            # httpd depend on backend project
+        depends_on:
+            - backend-golden
+            - backend-silver
+            - backend-bronze
+            - backend-iron
+
+    # we start reverse proxy project
+    front:
+        # Use dockerfile
+        build: ./devops-front-main
+        # Open port 80 for host machine
+        ports:
+            - "80:80"
         # Use my-network network with fixed ip
         networks:
             - my-network
