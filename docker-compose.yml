@@ -2,7 +2,37 @@ version: '3.7'
 
 services:
     # we start backend project
-    backend:
+    backend-golden:
+        # Use dockerfile
+        build: ./backend-api
+        # Use my-network network
+        networks:
+            - my-network
+        # Backend depend on database project
+        depends_on:
+            - database
+    # we start backend project
+    backend-silver:
+        # Use dockerfile
+        build: ./backend-api
+        # Use my-network network
+        networks:
+            - my-network
+        # Backend depend on database project
+        depends_on:
+            - database
+    # we start backend project
+    backend-bronze:
+        # Use dockerfile
+        build: ./backend-api
+        # Use my-network network
+        networks:
+            - my-network
+        # Backend depend on database project
+        depends_on:
+            - database
+    # we start backend project
+    backend-iron:
         # Use dockerfile
         build: ./backend-api
         # Use my-network network
@@ -35,7 +65,10 @@ services:
             - my-network
             # httpd depend on backend project
         depends_on:
-            - backend
+            - backend-golden
+            - backend-silver
+            - backend-bronze
+            - backend-iron
 
             # we create network project with a bridge connection
 networks:
