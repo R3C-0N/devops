@@ -35,6 +35,7 @@ jobs:
               run: mvn clean verify --file ./backend-api/app/pom.xml
 ```
 **Execution**
+
 ![github action](./img/github-action.png)
 
 **docker build and push**
