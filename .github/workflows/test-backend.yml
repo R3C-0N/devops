@@ -2,10 +2,10 @@ name: CI devops 2023
 'on':
   push:
     branches:
-        - TP02
-        - develop
+      - TP02
+      - develop
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [ opened, synchronize, reopened ]
 jobs:
   test-backend:
     runs-on: ubuntu-22.04
