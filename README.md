@@ -39,3 +39,10 @@ mathis.medard.takima.cloud | SUCCESS => {
 }
 ```
 
+** ansible install apache, echo into index.html and start apache**
+
+```bash
+$ ansible all -m yum -a "name=httpd state=present" --private-key=/tmp/id_rsa -u centos --become
+$ ansible all -m shell -a 'echo "<html><h1>Hello World</h1></html>" >> /var/www/html/index.html' --private-key=/tmp/id_rsa -u centos --become
+$ ansible all -m service -a "name=httpd state=started" --private-key=/tmp/id_rsa -u centos --become
+```
