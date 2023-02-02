@@ -269,3 +269,57 @@ mathis.medard.takima.cloud : ok=16   changed=4    unreachable=0    failed=0    s
 
 ## Deploy your app
 
+**To create network** 
+
+```yaml
+- name: Create a network
+  community.docker.docker_network:
+    name: my-network
+    # do not recreate it if it already exists
+    state: present
+```
+
+**To create container database**
+
+```yaml
+- name: Run Database
+  docker_container:
+    # Name of the container
+    name: devops-database-1
+    # image to download
+    image: matmed/tp01-database:1.1
+    # env to overload
+    env:
+      POSTGRES_DB: db
+      POSTGRES_USER: usr
+      POSTGRES_PASSWORD: pwd
+    # Networks to connect
+    networks:
+      - name: my-network
+```
+
+**To create container backend**
+
+```yaml
+- name: Run Backend
+  docker_container:
+    name: devops-backend-1
+    image: matmed/tp01-backend:1.1
+    networks:
+      - name: my-network
+```
+
+**To create container proxy**
+
+```yaml
+- name: Run HTTPD
+  docker_container:
+    name: devops-httpd-1
+    image: matmed/tp01-httpd:1.1
+    networks:
+      - name: my-network
+    # Port to expose to public
+    ports:
+      - "80:80"
+```
+
