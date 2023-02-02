@@ -1,0 +1,1 @@
+cp ./ansible/id_rsa /tmp/id_rsa
