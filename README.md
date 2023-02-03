@@ -325,4 +325,6 @@ mathis.medard.takima.cloud : ok=16   changed=4    unreachable=0    failed=0    s
 
 ## Front
 
-Work normally
+![front](/img/front.png)
+
+✅ Ok
