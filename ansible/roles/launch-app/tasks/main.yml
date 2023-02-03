@@ -1,8 +1,29 @@
 ---
 # tasks file for roles/launch-app
-- name: Run Backend
+- name: Run Backend-golden
   docker_container:
-    name: devops-backend-1
+    name: devops-backend-golden-1
+    image: matmed/tp01-backend:1.5
+    networks:
+      - name: my-network
+
+- name: Run Backend-silver
+  docker_container:
+    name: devops-backend-silver-1
+    image: matmed/tp01-backend:1.5
+    networks:
+      - name: my-network
+
+- name: Run Backend-bronze
+  docker_container:
+    name: devops-backend-bronze-1
+    image: matmed/tp01-backend:1.5
+    networks:
+      - name: my-network
+
+- name: Run Backend-platinium
+  docker_container:
+    name: devops-backend-platinium-1
     image: matmed/tp01-backend:1.5
     networks:
       - name: my-network

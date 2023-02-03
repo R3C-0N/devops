@@ -8,7 +8,7 @@
 - name: Run HTTPD
   docker_container:
     name: devops-httpd-1
-    image: matmed/tp01-httpd:1.5
+    image: matmed/tp01-httpd:1.6
     networks:
       - name: my-network
     ports:

@@ -2,47 +2,7 @@ version: '3.7'
 
 services:
     # we start backend project
-#    backend-golden:
-        # Use dockerfile
-#        build: ./backend-api
-        # Use my-network network
-#        networks:
-#            - my-network
-        # Backend depend on database project
-#        depends_on:
-#            - database
-    # we start backend project
-#    backend-silver:
-        # Use dockerfile
-#        build: ./backend-api
-        # Use my-network network
-#        networks:
-#            - my-network
-        # Backend depend on database project
-#        depends_on:
-#            - database
-    # we start backend project
-#    backend-bronze:
-        # Use dockerfile
-#        build: ./backend-api
-        # Use my-network network
-#        networks:
-#            - my-network
-        # Backend depend on database project
-#        depends_on:
-#            - database
-    # we start backend project
-#    backend-platinium:
-        # Use dockerfile
-#        build: ./backend-api
-        # Use my-network network
-#        networks:
-#            - my-network
-        # Backend depend on database project
-#        depends_on:
-#            - database
-    # we start backend project
-    backend:
+    backend-golden:
         # Use dockerfile
         build: ./backend-api
         # Use my-network network
@@ -51,6 +11,46 @@ services:
         # Backend depend on database project
         depends_on:
             - database
+    # we start backend project
+    backend-silver:
+#         Use dockerfile
+        build: ./backend-api
+        # Use my-network network
+        networks:
+            - my-network
+        # Backend depend on database project
+        depends_on:
+            - database
+    # we start backend project
+    backend-bronze:
+        # Use dockerfile
+        build: ./backend-api
+        # Use my-network network
+        networks:
+            - my-network
+        # Backend depend on database project
+        depends_on:
+            - database
+    # we start backend project
+    backend-platinium:
+        # Use dockerfile
+        build: ./backend-api
+        # Use my-network network
+        networks:
+            - my-network
+        # Backend depend on database project
+        depends_on:
+            - database
+    # we start backend project
+#    backend:
+        # Use dockerfile
+#        build: ./backend-api
+        # Use my-network network
+#        networks:
+#            - my-network
+        # Backend depend on database project
+#        depends_on:
+#            - database
 
     # we start database project
     database:
@@ -75,11 +75,11 @@ services:
             - my-network
             # httpd depend on backend project
         depends_on:
-            - backend
-#            - backend-golden
-#            - backend-silver
-#            - backend-bronze
-#            - backend-platinium
+#            - backend
+            - backend-golden
+            - backend-silver
+            - backend-bronze
+            - backend-platinium
 
     # we start reverse proxy project
     front:
@@ -93,11 +93,11 @@ services:
             - my-network
             # httpd depend on backend project
         depends_on:
-            - backend
-#            - backend-golden
-#            - backend-silver
-#            - backend-bronze
-#            - backend-platinium
+#            - backend
+            - backend-golden
+            - backend-silver
+            - backend-bronze
+            - backend-platinium
 
             # we create network project with a bridge connection
 networks:
