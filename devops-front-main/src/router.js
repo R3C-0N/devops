@@ -14,12 +14,12 @@ export default new Router({
             component: Home
         },
         {
-            path: '/departments',
+            path: '/departments/',
             name: 'department-list',
             component: () => import(/* webpackChunkName: "about" */ './components/DepartmentList.vue')
         },
         {
-            path: '/departments/:name',
+            path: '/departments/:name/',
             name: 'department',
             component: () => import(/* webpackChunkName: "about" */ './components/Department.vue')
         }

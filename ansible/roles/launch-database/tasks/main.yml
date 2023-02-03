@@ -3,7 +3,7 @@
 - name: Run Database
   docker_container:
     name: devops-database-1
-    image: matmed/tp01-database:1.1
+    image: matmed/tp01-database:1.5
     env:
       POSTGRES_DB: db
       POSTGRES_USER: usr

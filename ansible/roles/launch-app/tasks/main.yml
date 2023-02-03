@@ -3,6 +3,6 @@
 - name: Run Backend
   docker_container:
     name: devops-backend-1
-    image: matmed/tp01-backend:1.1
+    image: matmed/tp01-backend:1.5
     networks:
       - name: my-network

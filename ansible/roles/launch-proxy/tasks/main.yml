@@ -1,10 +1,15 @@
 ---
 # tasks file for roles/launch-proxy
+- name: Stop a container
+  community.docker.docker_container:
+    name: devops-httpd-1
+    state: stopped
+
 - name: Run HTTPD
   docker_container:
     name: devops-httpd-1
-    image: matmed/tp01-httpd:1.1
+    image: matmed/tp01-httpd:1.5
     networks:
       - name: my-network
     ports:
-      - "80:80"
+      - "8080:8080"

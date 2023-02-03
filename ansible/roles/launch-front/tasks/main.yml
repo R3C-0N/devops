@@ -1,0 +1,18 @@
+---
+# tasks file for roles/launch-front
+
+- name: Stop a container
+  community.docker.docker_container:
+    name: devops-front-1
+    state: stopped
+
+- name: Run front
+  docker_container:
+    name: devops-front-1
+    image: matmed/tp01-front:1.5
+    networks:
+      - name: my-network
+    ports:
+      - "80:80"
+    env:
+      VUE_APP_API_URL: "http://devops-httpd-1:8080"
